@@ -356,6 +356,7 @@ let deckOfCards = [
      },
 
 ]
+
 let dealerbackground = {"image": 'images/backgroundcard.png' };
 let dealButton = document.querySelector('#deal-button');
 let imageDealer = document.querySelector('#dealer-hand');
@@ -370,6 +371,44 @@ let deck = deckOfCards;
 let pPoint=0;
 let dPoint= 0;
 
+let sum = 0;
+
+let betrun = true;
+
+
+let addDisable = ()=>{
+    dealButton.setAttribute("disabled"," ");
+    hitButton.setAttribute("disabled", " ");
+    standButton.setAttribute("disabled", " ");
+    resetButton.setAttribute("disabled", " ");
+}
+
+
+//add bet function
+let betButton = document.querySelector('#bet-button');
+let betInput = document.querySelector("#input");
+// let inputValue = document.getElementById("input")
+// console.log(inputValue.value);
+
+let finalBalance = document.querySelector('#final-balance');
+
+let number = 0;
+
+betButton.addEventListener('click', ()=>{
+    // if(betrun){
+    let inputValue = document.getElementById("input").value
+    // console.log(inputValue)
+    number = inputValue;
+    dealButton.removeAttribute("disabled");
+    
+
+
+
+})
+// console.log(number);
+
+
+
 
 //add eventListener to deal button
 let run = true;
@@ -379,6 +418,9 @@ let playerArr =[];
 
 dealButton.addEventListener('click', ()=>{
     if(run){
+        hitButton.removeAttribute("disabled");
+        standButton.removeAttribute("disabled");
+        resetButton.removeAttribute("disabled");
     for (let i = 0; i < 2; i++) {
         let randomCard = deck[Math.floor(Math.random()*deck.length)];
         let index = deck.findIndex(d => d===randomCard)
@@ -442,6 +484,11 @@ dealButton.addEventListener('click', ()=>{
     //player points =21 for the first round, win
     if(pPoint===21){
         gameOver.innerHTML = "Player win! Game is over!"
+        // finalBalance.innerHTML= `${number*1.5}`
+        sum += number*1.5;
+        finalBalance.innerHTML= `${sum}`
+
+
         
     }
 
@@ -459,13 +506,17 @@ hitButton.addEventListener('click',()=>{
     let index = deck.findIndex(d => d===randomCard)
     deck.splice(index,1);
     playerArr.push(randomCard);
+    console.log(playerArr);
 
 
     //display the card on the screen and add points on to Player screen
     let latestCard = playerArr.slice(-1)
+    console.log(latestCard);
     
    for(let i= (playerArr.length -1); i < playerArr.length; i++){
+    console.log(i);
     imagePlayer.innerHTML += `<img src="${playerArr[i].image}" alt="">`
+    console.log(imagePlayer);
 
     console.log(playerArr[i].card)
     if(playerArr[i].card == 'ace'){
@@ -482,6 +533,9 @@ hitButton.addEventListener('click',()=>{
 
    if(pPoint>21){
     gameOver.innerHTML = "Player bust! Game is over. Player lost!"
+    // finalBalance.innerHTML=0
+    sum -= number
+    finalBalance.innerHTML= `${sum}`
 
    }
 
@@ -489,6 +543,7 @@ hitButton.addEventListener('click',()=>{
 
 //add evenListener to stand button
 standButton.addEventListener('click', ()=>{
+    hitButton.setAttribute("disabled", " ")
     //draw one more card or not
     if(dPoint<=16){
         console.log(dPoint)
@@ -520,13 +575,27 @@ standButton.addEventListener('click', ()=>{
             dealerPoint.innerHTML=dPoint 
             if(dPoint > 21){
                 gameOver.innerHTML = "Dealer bust! Player win! Game over."
+                // finalBalance.innerHTML= `${number*2}`
+                sum += number*2
+                finalBalance.innerHTML= `${sum}`
+                
             }else{
                 if(dPoint> pPoint){
                     gameOver.innerHTML = "Dealer win! Game over."
+                    // finalBalance.innerHTML= 0
+                    sum -= number
+                    finalBalance.innerHTML= `${sum}`
                 }else if(dPoint==pPoint){
                     gameOver.innerHTML = "It's a tie."
+                    // finalBalance.innerHTML= 0
+                    sum -= number
+                    finalBalance.innerHTML= `${sum}`
                 }else{
                     gameOver.innerHTML = "Player win! Game over."
+                    // finalBalance.innerHTML= `${number*2}`
+                    sum += number*2
+                    finalBalance.innerHTML= `${sum}`
+                    
                 }
             }
            
@@ -541,19 +610,37 @@ standButton.addEventListener('click', ()=>{
             
             if(dPoint<=21){
             gameOver.innerHTML = "Dealer win! Game over."
+            // finalBalance.innerHTML= 0
+            sum -= number
+            finalBalance.innerHTML= `${sum}`
             }else{
                 gameOver.innerHTML = "Dealer bust! Player win! Game over."
+                // finalBalance.innerHTML= `${number*2}`
+                sum += number*2
+                finalBalance.innerHTML= `${sum}`
             }
         }else if(dPoint==pPoint){
             gameOver.innerHTML = "It's a tie."
+            // finalBalance.innerHTML= 0
+            sum -= number
+            finalBalance.innerHTML= `${sum}`
         }else{
             gameOver.innerHTML = "Player win! Game over."
+            // finalBalance.innerHTML= `${number*2}`
+            // number += number*2
+            sum += number*2
+            finalBalance.innerHTML= `${sum}`
         }
 
         dealerPoint.innerHTML=dPoint
     }
 
 })
+    // }
+    // betrun = false;
+    // console.log(inputValue);
+// })
+
 
 //reset button
 resetButton.addEventListener("click", ()=>{
@@ -567,6 +654,15 @@ resetButton.addEventListener("click", ()=>{
     imagePlayer.innerHTML = "";
     gameOver.innerHTML = "";
     run = true;
+    betrun = true;
+
+    inputValue="";
+    finalBalance.innerHTML= `${sum}`;
+    addDisable();
     
 })
+
+
+
+
 
