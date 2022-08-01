@@ -364,11 +364,11 @@ let dealerPoint = document.querySelector('#dealer-points');
 let playerPoint = document.querySelector('#player-points');
 let hitButton = document.querySelector('#hit-button');
 let standButton = document.querySelector('#stand-button');
+let resetButton = document.querySelector('#reset-button');
 let gameOver = document.querySelector('#game-over');
 let deck = deckOfCards;
 let pPoint=0;
 let dPoint= 0;
-
 
 
 //add eventListener to deal button
@@ -378,7 +378,7 @@ let playerArr =[];
 
 
 dealButton.addEventListener('click', ()=>{
-  
+    if(run){
     for (let i = 0; i < 2; i++) {
         let randomCard = deck[Math.floor(Math.random()*deck.length)];
         let index = deck.findIndex(d => d===randomCard)
@@ -410,9 +410,6 @@ dealButton.addEventListener('click', ()=>{
     }
     console.log(dPoint)
    
-  
-
-
     //player point
    
     if(playerArr.some(card => card.card === "ace")){
@@ -433,8 +430,7 @@ dealButton.addEventListener('click', ()=>{
 
     
     //add the card picture onto the screen
-
-        
+ 
         imageDealer.innerHTML += `<img src="${dealerArr[0].image}" alt="">`
         imageDealer.innerHTML += `<img src="${dealerbackground.image}" alt=""></img>`
         
@@ -448,12 +444,11 @@ dealButton.addEventListener('click', ()=>{
         gameOver.innerHTML = "Player win! Game is over!"
         
     }
-        
-    
+
+    run = false;
+   
+}
 })
-
-
-
 
 //add evenListener to hit button
 
@@ -491,9 +486,6 @@ hitButton.addEventListener('click',()=>{
    }
 
 })
-
-
-
 
 //add evenListener to stand button
 standButton.addEventListener('click', ()=>{
@@ -538,7 +530,7 @@ standButton.addEventListener('click', ()=>{
                 }
             }
            
-            //   dealerPoint.innerHTML=dPoint
+            
     }else{
         imageDealer.innerHTML = "";
         for(let i= 0; i < dealerArr.length; i++){
@@ -563,4 +555,18 @@ standButton.addEventListener('click', ()=>{
 
 })
 
+//reset button
+resetButton.addEventListener("click", ()=>{
+    dealerArr =[];
+    playerArr =[];
+    dPoint = 0;
+    pPoint = 0;
+    dealerPoint.innerHTML = "";
+    playerPoint.innerHTML = "";
+    imageDealer.innerHTML = "";
+    imagePlayer.innerHTML = "";
+    gameOver.innerHTML = "";
+    run = true;
+    
+})
 
