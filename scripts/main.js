@@ -373,7 +373,6 @@ let dPoint= 0;
 
 let sum = 0;
 
-let betrun = true;
 
 
 let addDisable = ()=>{
@@ -383,31 +382,22 @@ let addDisable = ()=>{
     resetButton.setAttribute("disabled", " ");
 }
 
-
 //add bet function
 let betButton = document.querySelector('#bet-button');
 let betInput = document.querySelector("#input");
-// let inputValue = document.getElementById("input")
-// console.log(inputValue.value);
 
 let finalBalance = document.querySelector('#final-balance');
 
 let number = 0;
 
 betButton.addEventListener('click', ()=>{
-    // if(betrun){
+    
     let inputValue = document.getElementById("input").value
-    // console.log(inputValue)
+  
     number = inputValue;
     dealButton.removeAttribute("disabled");
-    
-
-
 
 })
-// console.log(number);
-
-
 
 
 //add eventListener to deal button
@@ -484,11 +474,8 @@ dealButton.addEventListener('click', ()=>{
     //player points =21 for the first round, win
     if(pPoint===21){
         gameOver.innerHTML = "Player win! Game is over!"
-        // finalBalance.innerHTML= `${number*1.5}`
         sum += number*1.5;
         finalBalance.innerHTML= `${sum}`
-
-
         
     }
 
@@ -533,7 +520,6 @@ hitButton.addEventListener('click',()=>{
 
    if(pPoint>21){
     gameOver.innerHTML = "Player bust! Game is over. Player lost!"
-    // finalBalance.innerHTML=0
     sum -= number
     finalBalance.innerHTML= `${sum}`
 
@@ -575,24 +561,20 @@ standButton.addEventListener('click', ()=>{
             dealerPoint.innerHTML=dPoint 
             if(dPoint > 21){
                 gameOver.innerHTML = "Dealer bust! Player win! Game over."
-                // finalBalance.innerHTML= `${number*2}`
                 sum += number*2
                 finalBalance.innerHTML= `${sum}`
                 
             }else{
                 if(dPoint> pPoint){
                     gameOver.innerHTML = "Dealer win! Game over."
-                    // finalBalance.innerHTML= 0
                     sum -= number
                     finalBalance.innerHTML= `${sum}`
                 }else if(dPoint==pPoint){
                     gameOver.innerHTML = "It's a tie."
-                    // finalBalance.innerHTML= 0
                     sum -= number
                     finalBalance.innerHTML= `${sum}`
                 }else{
                     gameOver.innerHTML = "Player win! Game over."
-                    // finalBalance.innerHTML= `${number*2}`
                     sum += number*2
                     finalBalance.innerHTML= `${sum}`
                     
@@ -610,24 +592,19 @@ standButton.addEventListener('click', ()=>{
             
             if(dPoint<=21){
             gameOver.innerHTML = "Dealer win! Game over."
-            // finalBalance.innerHTML= 0
             sum -= number
             finalBalance.innerHTML= `${sum}`
             }else{
                 gameOver.innerHTML = "Dealer bust! Player win! Game over."
-                // finalBalance.innerHTML= `${number*2}`
                 sum += number*2
                 finalBalance.innerHTML= `${sum}`
             }
         }else if(dPoint==pPoint){
             gameOver.innerHTML = "It's a tie."
-            // finalBalance.innerHTML= 0
             sum -= number
             finalBalance.innerHTML= `${sum}`
         }else{
             gameOver.innerHTML = "Player win! Game over."
-            // finalBalance.innerHTML= `${number*2}`
-            // number += number*2
             sum += number*2
             finalBalance.innerHTML= `${sum}`
         }
@@ -636,10 +613,6 @@ standButton.addEventListener('click', ()=>{
     }
 
 })
-    // }
-    // betrun = false;
-    // console.log(inputValue);
-// })
 
 
 //reset button
