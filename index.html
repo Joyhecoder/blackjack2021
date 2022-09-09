@@ -4,8 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Blackjack</title>
- 
-  <link rel="stylesheet" href="extras/HereIsOneIPreparedEarlier.css">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="stylesheet" href="extras/HereIsOneIPreparedEarlier.css">
+   
+
 </head>
 <body>
   <div class="message-box" id="messages"></div>
@@ -29,14 +32,37 @@
       </div>
     </div>
     <div class="buttons">
-      <button id="deal-button" type="button">Deal</button>
-      <button id="hit-button" type="button">Hit</button>
-      <button id="stand-button" type="button">Stand</button>
+      <button id="deal-button" type="button" disabled>Deal</button>
+      <button id="hit-button" type="button" disabled>Hit</button>
+      <button id="stand-button" type="button" disabled>Stand</button>
+      <button id="reset-button" type="button" disabled>Reset</button>
     </div>
   </div>
 
-  <div id="game-over"></div>
+  <br>
+  <br>
+  <div id="game-over" class="gameover"></div>
+  <br>
+  <br>
+
+  <div class="table">
+    <button id="bet-button" type="button">Bet</button>
+    <input id="input" type="number"> 
+    <!-- <button id="show-final-button" type="button">
+      Show final balance:   Your final balance is $ -->
+    <div id="show-final-button">
+      Your final balance is $
+    
+      <span id="final-balance"></span>
+    </div>
+    
+
+    
+  </div>
 
   <script src="scripts/main.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>
 </body>
 </html>
